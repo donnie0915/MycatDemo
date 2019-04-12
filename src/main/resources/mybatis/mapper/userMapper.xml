@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.donnie.dao.UserMapper">
+
+    <resultMap id="BaseResultMap" type="user">
+        <id column="id" property="id" />
+        <result column="name" property="name" />
+        <result column="email" property="email" />
+        <result column="sex" property="sex"/>
+        <result column="age" property="age"/>
+        <result column="status" property="status"/>
+        <result column="description" property="description"/>
+        <result column="mobile" property="mobile"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">id, name, email, sex, age,status,description,mobile</sql>
+
+    <select id="getAll" resultMap="BaseResultMap">SELECT
+        <include refid="Base_Column_List"/>
+        FROM user
+    </select>
+
+    <select id="getOne" parameterType="java.lang.Long" resultMap="BaseResultMap">SELECT
+        <include refid="Base_Column_List"/>
+        FROM user WHERE id = #{id}
+    </select>
+
+    <insert id="insert" parameterType="user">
+        INSERT INTO user ( name, email, sex, age,status,description,mobile) VALUES
+        (#{name}, #{email}, #{sex},#{age}, #{status}, #{description},#{mobile} )
+    </insert>
+
+    <update id="update" parameterType="user">
+        UPDATE user SET
+        <if test="name != null"> name = #{name},</if>
+        <if test="description != null">description = #{description},</if>
+        <if test="mobile != null">mobile = #{mobile},</if>
+        WHERE id = #{id}
+    </update>
+
+    <delete id="delete" parameterType="java.lang.Long">DELETE FROM user WHERE id =#{id}</delete>
+</mapper>

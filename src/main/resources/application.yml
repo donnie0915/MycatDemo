@@ -1,0 +1,23 @@
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    username: okhjp
+    password: 123456
+    url: jdbc:mysql://127.0.0.1:8066/user_db?useUnicode=true&characterEncoding=utf-8
+  application:
+    name: mycatdemo
+
+server:
+  port: 8080
+
+
+mybatis:
+  config-location: classpath:mybatis/mybatis-config.xml
+  mapper-locations: classpath:mybatis/mapper/*.xml
+
+#打印mybatis sql日志
+logging:
+  level:
+    com.donnie : debug
+
