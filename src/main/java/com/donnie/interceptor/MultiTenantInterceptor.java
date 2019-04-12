@@ -1,7 +1,7 @@
 package com.donnie.interceptor;
 
 
-import com.donnie.controller.UserController;
+import com.donnie.config.MultiTenantHolder;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.executor.statement.StatementHandler;
 import org.apache.ibatis.plugin.*;
@@ -39,8 +39,6 @@ public class MultiTenantInterceptor implements Interceptor {
         log.info("添加mycat注释的sql =" + sql);
         metaStatementHandler.setValue("delegate.boundSql.sql",sql);
         Object result = invocation.proceed();
-
-        MultiTenantHolder.remove();
 
         return result;
     }

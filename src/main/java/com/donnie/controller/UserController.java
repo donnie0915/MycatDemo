@@ -2,7 +2,6 @@ package com.donnie.controller;
 
 import com.donnie.dao.UserMapper;
 import com.donnie.entity.User;
-import com.donnie.interceptor.MultiTenantHolder;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,8 +23,6 @@ public class UserController  {
     @GetMapping("/lists")
     @ResponseBody
     public Object list(String tenantId){
-
-        MultiTenantHolder.setCurrentNode("dn"+tenantId);
 
         List<User> all = userMapper.getAll();
 
